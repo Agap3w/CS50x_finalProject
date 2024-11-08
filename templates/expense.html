@@ -1,0 +1,55 @@
+<!--
+#layout generale
+#si capisce che è un menù a tendina?
+-->
+{% extends "layout.html" %}
+
+{% block title %}
+    Add expense
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>
+            <h3> Inserisci una spesa:</h3>
+            <h6> Numeri tondi, senza decimali.</h6>
+        </p>
+
+        <form action="/expense" method="post">
+            <select class="form-control mx-auto w-auto mb-3" name="category">
+                <option value="supermarket">Supermarket</option>
+                <option value="restaurants">Restaurant</option>
+                <option value="hobby">Hobby</option>
+                <option value="enea">Enea</option>
+                <option value="other">Other</option>
+                <option value="fixed_cost">Fixed cost</option>
+            </select>
+            <input class="form-control mx-auto w-auto mb-3" name="description" placeholder="Descrizione" type="text">
+            <input class="form-control mx-auto w-auto mb-3" name="amount" placeholder="Importo" type="number">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div>
+        <p>
+            <h6>Ultime spese inserite:</h6>
+        </p>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+
+            </tr>
+            {% for row in user_last_expenses %}
+            <tr>
+                <td>{{ row.category }}</td>
+                <td>{{ row.description }}</td>
+                <td>{{ row.amount }} €</td>
+                <td>{{ row.formatted_date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

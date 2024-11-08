@@ -1,0 +1,96 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+/* table da sistemare con bootstrap? */
+table {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    border-collapse: collapse;
+    background-color: #FAFAFA;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.highlight,th {
+    background-color: #0A5269;
+    color: white;
+}
+
+/* General styles */
+.container {
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-container {
+    margin-bottom: 20px; /* Space between dropdown and content below */
+}
+
+/* Flexbox Layout for Table and Chart */
+.form-chart-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto new lines */
+    gap: 20px; /* Space between the table and the chart */
+}
+
+.table-container {
+    flex: 1;
+    min-width: 300px; /* Minimum width for the table container */
+}
+
+.chart-container {
+    flex: 1;
+    max-width: 600px; /* Maximum width for the chart container */
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .form-chart-container {
+        flex-direction: column; /* Stack items vertically on small screens */
+    }
+
+    .chart-container {
+        max-width: 100%; /* Allow chart container to take full width on small screens */
+    }
+}

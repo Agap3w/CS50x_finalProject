@@ -1,0 +1,45 @@
+<!--
+#due colonne, una URGENT e una BACKLOG (in desktop side-by-side, su mobile una sotto l'altra)
+#nella colonna tutti i to do status=1
+#aggiungo per ogni to-do la possibilità di checkare completato (settando status=0)
+
+#OPTIONAL: tab per vedere storico todo status=0
+#OPTIONAL: gestione del passaggio da URGENT a BACKLOG sia manuale (lo sposta l'utente) che automatico (es dopo un po' di gg).
+
+#VERYOPTIONAL: differenziare 'risolto' da 'cancellato'
+#VERYOPTIONAL: analytics(tot to-do al gg, tot gg per un to-do, %completion rate, etc.)
+-->
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    {% if search %}
+        <h1> {{ search.symbol }} current value: {{ search.price | usd }}</h1>
+    {% endif %}
+
+    <p>
+        <h6>Recent Search:</h6>
+    </p>
+    <table>
+        <tr>
+            <th>Symbol</th>
+            <th>Unit Price</th>
+        </tr>
+        {% for row in search_history %}
+        <tr>
+            <td>{{ row.item }}</td>
+            <td>{{ row.price | usd}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

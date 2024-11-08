@@ -1,0 +1,71 @@
+<!--
+#sistemare layout pagina e grafico
+#OPTIONAL: templettizzazione insight (non generativa)
+-->
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Numberz
+{% endblock %}
+
+{% block main %}
+<div class= "container">
+
+    <!-- menu tendina scegli il mese -->
+    <div class="dropdown-container">
+        <form method="POST" action="/numberz">
+            <label for="month">Choose a month:</label>
+            <select id="month" name="month">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <!-- Form and Chart Containers -->
+    <div class="form-chart-container">
+        <div class="table-container">
+        <p>
+            <h6>Spese {{ selected_month }}:</h6>
+        </p>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+        </tr>
+            {% for row in selected_month_expenses %}
+            <tr>
+                <td>{{ row.category }}</td>
+                <td>{{ row.description }}</td>
+                <td>{{ row.amount }}€</td>
+                <td>{{ row.formatted_date }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class = "chart-container">
+        <div id="labels" style="display: none;">{{ expenses_data.labels | tojson | safe }}</div>
+        <div id="amounts" style="display: none;">{{ expenses_data.amounts | tojson | safe }}</div>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='logic.js') }}"></script>
+{% endblock %}
