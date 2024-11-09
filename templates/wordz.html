@@ -1,4 +1,5 @@
 <!--
+estetica: tabelle side to side (creo container)
 #OPTIONAL: tab per vedere storico todo status=0
 #OPTIONAL: gestione del passaggio da URGENT a BACKLOG sia manuale (lo sposta l'utente) che automatico (es dopo un po' di gg).
 
@@ -13,49 +14,51 @@
 
 {% block main %}
     <!-- tabella1: urgent -->
-    <div>
-        <p><h6>Urgent:</h6></p>
-        <table>
-            <tr>
-                <th>To-do</th>
-                <th>Delaying for</th>
-                <th></th>
-            </tr>
-            {% for row in user_todo_urgent %}
-            <tr>
-                <td>{{ row.item }}</td>
-                <td>{{ row.delay }}</td>
-                <td>
-                    <form method="post">
-                        <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
-                    </form>    
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+    <div class="table-container2">
+        <div>
+            <p><h6>Urgent:</h6></p>
+            <table>
+                <tr>
+                    <th>To-do</th>
+                    <th>Delaying for</th>
+                    <th></th>
+                </tr>
+                {% for row in user_todo_urgent %}
+                <tr>
+                    <td>{{ row.item }}</td>
+                    <td>{{ row.delay }}</td>
+                    <td>
+                        <form method="post">
+                            <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
+                        </form>    
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-    <!-- tabella2: backlog -->
-    <div>
-        <p><h6>Backlog:</h6></p>
-        <table>
-            <tr>
-                <th>To-do</th>
-                <th>Delaying for</th>
-                <th></th>
-            </tr>
-            {% for row in user_todo_backlog %}
-            <tr>
-                <td>{{ row.item }}</td>
-                <td>{{ row.delay }}</td>
-                <td>
-                    <form method="post">
-                        <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
-                    </form>    
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+        <!-- tabella2: backlog -->
+        <div>
+            <p><h6>Backlog:</h6></p>
+            <table>
+                <tr>
+                    <th>To-do</th>
+                    <th>Delaying for</th>
+                    <th></th>
+                </tr>
+                {% for row in user_todo_backlog %}
+                <tr>
+                    <td>{{ row.item }}</td>
+                    <td>{{ row.delay }}</td>
+                    <td>
+                        <form method="post">
+                            <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
+                        </form>    
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 
 {% endblock %}

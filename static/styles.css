@@ -68,6 +68,14 @@ td, th {
     min-width: 300px; /* Minimum width for the table container */
 }
 
+/*for double table in wordz */
+.table-container2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px; /* Adjust the gap as needed */
+
+}
+
 .chart-container {
     flex: 1;
     max-width: 600px; /* Maximum width for the chart container */
