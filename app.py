@@ -32,7 +32,7 @@ def after_request(response):
 @login_required
 def index():
     #mando html a schermo
-    return render_template("index.html")
+    return render_template("index.html", username = session["username"])
 
 @app.route("/todo", methods=["GET", "POST"])
 @login_required
@@ -113,9 +113,9 @@ def wordz():
     # POST(=tasto remove) rimuove la riga dalla table todos e aggiorna pagina
     if request.method == "POST":
         item_remove = request.form.get("remove")
-    if item_remove:
-        db.execute("DELETE FROM todos WHERE item = ?", item_remove)
-        return redirect(url_for("wordz"))
+        if item_remove:
+            db.execute("DELETE FROM todos WHERE item = ?", item_remove)
+            return redirect(url_for("wordz"))
 
     #GET, calcolo tabelle urgent e backlog e mando html a schermo
     else:
@@ -123,7 +123,7 @@ def wordz():
         for row in user_todo_urgent:
             row['timedate'] = datetime.strptime(row['timedate'], '%Y-%m-%d %H:%M:%S')  # Adjust format as needed
             row['delay'] = (datetime.now() - row['timedate']).days
-            user_todo_backlog = db.execute("SELECT item, timedate FROM todos WHERE username = ? AND category = ? AND status = ?", session["username"], "backlog", "open")
+        user_todo_backlog = db.execute("SELECT item, timedate FROM todos WHERE username = ? AND category = ? AND status = ?", session["username"], "backlog", "open")
         for row in user_todo_backlog:
             row['timedate'] = datetime.strptime(row['timedate'], '%Y-%m-%d %H:%M:%S')  # Adjust format as needed
             row['delay'] = (datetime.now() - row['timedate']).days  

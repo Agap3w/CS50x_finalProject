@@ -20,7 +20,7 @@
             <tr>
                 <th>To-do</th>
                 <th>Delaying for</th>
-                <th>Remove</th>
+                <th></th>
             </tr>
             {% for row in user_todo_urgent %}
             <tr>
@@ -28,7 +28,7 @@
                 <td>{{ row.delaying }} €</td>
                 <td>
                     <form method="post">
-                        <button type="submit" name="remove" value="{{ row.item }}">Done</button>
+                        <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
                     </form>    
                 </td>
             </tr>
@@ -38,13 +38,12 @@
 
     <!-- tabella2: backlog -->
     <div>
-        <p><h6>Urgent:</h6></p>
+        <p><h6>Backlog:</h6></p>
         <table>
             <tr>
                 <th>To-do</th>
                 <th>Delaying for</th>
-                <th>Done</th>
-                <th>Delete</th>
+                <th></th>
             </tr>
             {% for row in user_todo_backlog %}
             <tr>
@@ -52,7 +51,7 @@
                 <td>{{ row.delaying }} €</td>
                 <td>
                     <form method="post">
-                        <button type="submit" name="remove" value="{{ row.item }}">Done</button>
+                        <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
                     </form>    
                 </td>
             </tr>

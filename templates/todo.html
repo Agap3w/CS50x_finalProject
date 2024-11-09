@@ -1,5 +1,6 @@
 <!--
-aggiungo errore se cerco di inserire un todo duplicato
+#aggiungo errore se cerco di inserire un todo duplicato
+#pulsante categoria diventano due pulsanti (anche più comodo su mobile), tengo insert per ora
 -->
 
 {% extends "layout.html" %}
@@ -9,7 +10,7 @@ aggiungo errore se cerco di inserire un todo duplicato
 {% endblock %}
 
 {% block main %}
-    <form action="/add_todo" method="post">
+    <form action="/todo" method="post">
         <div class="mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="todo" placeholder="To-do" type="text">
         </div>

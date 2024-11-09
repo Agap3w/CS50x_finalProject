@@ -1,5 +1,5 @@
 <!--
-#decidere come gestire. potrei avere una sorta di grande divisore (comodo soprattutto per mobile) che mi fa scegliere tra i 4 (tipo spicchi trivial)
+#OPTIONAL: decidere come gestire. potrei avere una sorta di grande divisore (comodo soprattutto per mobile) che mi fa scegliere tra i 4 (tipo spicchi trivial)
 -->
 
 {% extends "layout.html" %}
@@ -10,8 +10,10 @@
 
 {% block main %}
 <p>
-    <h3>Hello, {{  username  }}.</h3>
-    <h6>Please find below your <span class="highlight"> recap</span>:</h6>
+    <h3>Hello, {{  username  }}.</h3><br><br><br>
+    <h6>Here you can track your <a href="/todo" class="highlight">to-do</a></h6><br><br><br>
+    <h6>and manage your <a href="/expense" class="highlight">expenses</a></h6>
+
 </p>
 
 {% endblock %}
