@@ -2,7 +2,6 @@
 #OPTIONAL: tab per vedere storico todo status=0
 #OPTIONAL: gestione del passaggio da URGENT a BACKLOG sia manuale (lo sposta l'utente) che automatico (es dopo un po' di gg).
 
-#VERYOPTIONAL: differenziare 'risolto' da 'cancellato'
 #VERYOPTIONAL: analytics(tot to-do al gg, tot gg per un to-do, %completion rate, etc.)
 -->
 
@@ -25,7 +24,7 @@
             {% for row in user_todo_urgent %}
             <tr>
                 <td>{{ row.item }}</td>
-                <td>{{ row.delaying }} €</td>
+                <td>{{ row.delay }}</td>
                 <td>
                     <form method="post">
                         <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
@@ -48,7 +47,7 @@
             {% for row in user_todo_backlog %}
             <tr>
                 <td>{{ row.item }}</td>
-                <td>{{ row.delaying }} €</td>
+                <td>{{ row.delay }}</td>
                 <td>
                     <form method="post">
                         <button type="submit" name="remove" value="{{ row.item }}">Remove</button>

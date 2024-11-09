@@ -2,7 +2,7 @@ import os
 
 from cs50 import SQL
 from datetime import datetime
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -44,7 +44,14 @@ def todo():
 
         # reject empty input
         if not todo or not prio:
-            return apology("Please fill both fields.")
+            flash("Missing information. Try Again")
+            return redirect("/todo")
+        
+        # reject duplicates
+        if db.execute("SELECT * FROM todos WHERE username = ? AND item = ?", session["username"], todo):
+            flash("This todo already exists. Try Again")
+            return redirect("/todo")
+
 
         # update todos table inserting new item
         db.execute("INSERT INTO todos (username, category, item, status) VALUES (?,?,?,?)",session["username"], prio, todo, "open")
@@ -126,7 +133,7 @@ def wordz():
         user_todo_backlog = db.execute("SELECT item, timedate FROM todos WHERE username = ? AND category = ? AND status = ?", session["username"], "backlog", "open")
         for row in user_todo_backlog:
             row['timedate'] = datetime.strptime(row['timedate'], '%Y-%m-%d %H:%M:%S')  # Adjust format as needed
-            row['delay'] = (datetime.now() - row['timedate']).days  
+            row['delay'] = (datetime.now() - row['timedate']).days
 
         return render_template("wordz.html", user_todo_urgent=user_todo_urgent, user_todo_backlog=user_todo_backlog)
 

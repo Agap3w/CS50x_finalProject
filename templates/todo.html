@@ -1,8 +1,3 @@
-<!--
-#aggiungo errore se cerco di inserire un todo duplicato
-#pulsante categoria diventano due pulsanti (anche più comodo su mobile), tengo insert per ora
--->
-
 {% extends "layout.html" %}
 
 {% block title %}
@@ -10,22 +5,30 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/todo" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="todo" placeholder="To-do" type="text">
-        </div>
-        <!-- menu tendina prio -->
-        <div class="dropdown-container">
-            <select id="prio" name="prio">
-                <option value="urgent">Urgent</option>
-                <option value="backlog">Backlog</option>
-            </select>
-        </div>
-        <button class="btn btn-primary" type="submit">Insert</button>
-    </form>
+
+<p>
+    <h3> Inserisci un to-do:</h3>
+    <h6> Scegliendo tra "urgente" e "backlog"</h6><br>    
+</p>
+
+<form action="/todo" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="todo" placeholder="To-do" type="text">
+    </div>
+    <div class="mb-3 btn-group" role="group">
+        <input type="radio" class="btn-check" name="prio" id="urgent" value="urgent" autocomplete="off">
+        <label class="btn btn-outline-primary" for="urgent">Urgent</label>
+
+        <input type="radio" class="btn-check" name="prio" id="backlog" value="backlog" autocomplete="off">
+        <label class="btn btn-outline-primary" for="backlog">Backlog</label>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
 
     <p>
-        <h6>Recently added:</h6>
+        <br><br></vr><h6>Recently added:</h6>
     </p>
     <table>
         <tr>
