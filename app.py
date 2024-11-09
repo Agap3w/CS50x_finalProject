@@ -2,7 +2,7 @@ import os
 
 from cs50 import SQL
 from datetime import datetime
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -31,75 +31,29 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-
-    #creo 1° tabella con portfolio
-    portfolio = db.execute("SELECT item, quantity FROM portfolio WHERE username = ? and quantity !=0", session["username"])
-    asset=0
-    for row in portfolio:
-        info=lookup(row["item"])
-        if info:
-            row["price"]=info["price"]
-            row["tot_item_value"]=row["price"]*row["quantity"]
-            asset += row["tot_item_value"]
-
-    #creo 2° tabella con recap cash
-    result = db.execute("SELECT cash FROM users WHERE username = ?", session["username"])
-    cash = result[0]["cash"]
-
     #mando html a schermo
-    return render_template("index.html", portfolio=portfolio, username=session["username"], cash=cash, asset=asset)
+    return render_template("index.html")
 
 @app.route("/todo", methods=["GET", "POST"])
 @login_required
 def todo():
-    """Buy shares of stock"""
+    #when users submit, save the 2 variables
     if request.method == "POST":
-        symbol=request.form.get("symbol")
-        quantity=request.form.get("shares")
+        todo=request.form.get("todo")
+        prio=request.form.get("prio")
 
         # reject empty input
-        if not symbol or not quantity:
-            return apology("Please fill both checkbox.")
+        if not todo or not prio:
+            return apology("Please fill both fields.")
 
-        # reject quantity<=0
-        try:
-            quantity = int(quantity)
-            if quantity <= 0:
-                return apology("Please insert a number bigger than 0 :)")
-        except ValueError:
-            return apology("Please insert a valid integer")
+        # update todos table inserting new item
+        db.execute("INSERT INTO todos (username, category, item, status) VALUES (?,?,?,?)",session["username"], prio, todo, "open")
 
-        # check if symbol exìsts
-        if not lookup(symbol):
-            return apology("Please enter a valid symbol.")
-
-        # Recupero i valori per le operazioni
-        price=lookup(symbol)["price"]
-        user_cash = db.execute("SELECT cash from users where username = ?", session["username"])[0]['cash']
-        transaction_amount = quantity * price
-
-        # check if I have enough money?
-        if user_cash < transaction_amount:
-            return apology("Sorry, it seems you do not have enough money for this transaction.")
-
-        # update users table reflecting expense
-        db.execute("UPDATE users SET cash = cash - ? WHERE username = ?", transaction_amount, session["username"])
-
-        # update history table inserting transaction
-        db.execute("INSERT INTO history (username, transaction_type, item, price, quantity) VALUES (?,?,?,?,?)",session["username"], "buy", symbol, price, quantity)
-
-        #user already had this item in portfolio table? to understand if create from zero or increase
-        item_count = db.execute("SELECT COUNT(*) FROM portfolio WHERE username = ? AND item = ?", session["username"], symbol)[0]['COUNT(*)']
-        # update portfolio table reflecting +item/quantity
-        if item_count > 0:
-            db.execute("UPDATE portfolio SET quantity = (quantity + ?) WHERE username = ? and item = ?", quantity, session["username"], symbol) #increase
-        else:
-            db.execute("INSERT INTO portfolio (username, item, quantity) VALUES (?,?,?)",session["username"], symbol, quantity) #create from zero
-
-        return redirect("/")
-
-    if request.method == "GET":
-        return render_template("todo.html")
+        return redirect("/todo")
+    
+    else: #if GET mando html
+        todo_history = db.execute("SELECT item, category FROM todos WHERE username = ? LIMIT 5", session["username"])
+        return render_template("todo.html", todo_history=todo_history)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -155,27 +109,28 @@ def logout():
 
 @app.route("/wordz", methods=["GET", "POST"])
 @login_required
-def quote():
-
+def wordz():
+    # POST(=tasto remove) rimuove la riga dalla table todos e aggiorna pagina
     if request.method == "POST":
-        symbol = request.form.get("symbol") #registro il search input
-        #se campo vuoto rimando errore
-        if not symbol:
-            return apology("Please enter a valid symbol.")
-        else:
-            search=lookup(symbol) #fz lookup restituisce dict 2 key: user_id e username
-            #se non esiste questo simbolo rimando errore
-            if not search:
-                return apology("Please enter a valid symbol.")
-            # inserisco ricerca in tabella sql 'history', la aggiorno, e rimando template html con risposta
-            else:
-                db.execute("INSERT INTO history (username, transaction_type, item, price) VALUES (?,?,?,?)",session["username"], "search", symbol, search["price"])
-                search_history = db.execute("SELECT item, price FROM history WHERE transaction_type = ? AND username = ? LIMIT 10", "search", session["username"])
-                return render_template("wordz.html", search_history=search_history, search=search)
+        item_remove = request.form.get("remove")
+    if item_remove:
+        db.execute("DELETE FROM todos WHERE item = ?", item_remove)
+        return redirect(url_for("wordz"))
 
-    else: #if GET mando html
-        search_history = db.execute("SELECT item, price FROM history WHERE transaction_type = ? AND username = ? LIMIT 10", "search", session["username"])
-        return render_template("wordz.html", search_history=search_history)
+    #GET, calcolo tabelle urgent e backlog e mando html a schermo
+    else:
+        user_todo_urgent = db.execute("SELECT item, timedate FROM todos WHERE username = ? AND category = ? AND status = ?", session["username"], "urgent", "open")
+        for row in user_todo_urgent:
+            row['timedate'] = datetime.strptime(row['timedate'], '%Y-%m-%d %H:%M:%S')  # Adjust format as needed
+            row['delay'] = (datetime.now() - row['timedate']).days
+            user_todo_backlog = db.execute("SELECT item, timedate FROM todos WHERE username = ? AND category = ? AND status = ?", session["username"], "backlog", "open")
+        for row in user_todo_backlog:
+            row['timedate'] = datetime.strptime(row['timedate'], '%Y-%m-%d %H:%M:%S')  # Adjust format as needed
+            row['delay'] = (datetime.now() - row['timedate']).days  
+
+        return render_template("wordz.html", user_todo_urgent=user_todo_urgent, user_todo_backlog=user_todo_backlog)
+
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

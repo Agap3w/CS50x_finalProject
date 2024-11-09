@@ -13,39 +13,5 @@
     <h3>Hello, {{  username  }}.</h3>
     <h6>Please find below your <span class="highlight"> recap</span>:</h6>
 </p>
-<table>
-    <tr>
-        <th>Cash</th>
-        <th>Asset</th>
-        <th>Tot Cash+Asset</th>
-    </tr>
-
-    <tr>
-        <td>{{ cash | usd }}</td>
-        <td>{{ asset | usd }}</td>
-        <td>{{ (cash + asset) | usd }}</td>
-    </tr>
-
-</table>
-
-<p>
-    <h6>Please find below your current <span class="highlight"> portfolio</span> composition:</h6>
-</p>
-<table>
-    <tr>
-        <th>Item</th>
-        <th>Quantity</th>
-        <th>Unit Price</th>
-        <th>Tot Value</th>
-    </tr>
-    {% for row in portfolio %}
-    <tr>
-        <td>{{ row.item }}</td>
-        <td>{{ row.quantity }}</td>
-        <td>{{ row.price | usd}}</td>
-        <td>{{ row.tot_item_value | usd}}</td>
-    </tr>
-    {% endfor %}
-</table>
 
 {% endblock %}

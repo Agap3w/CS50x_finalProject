@@ -1,8 +1,4 @@
 <!--
-#due colonne, una URGENT e una BACKLOG (in desktop side-by-side, su mobile una sotto l'altra)
-#nella colonna tutti i to do status=1
-#aggiungo per ogni to-do la possibilità di checkare completato (settando status=0)
-
 #OPTIONAL: tab per vedere storico todo status=0
 #OPTIONAL: gestione del passaggio da URGENT a BACKLOG sia manuale (lo sposta l'utente) che automatico (es dopo un po' di gg).
 
@@ -13,33 +9,55 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Quote
+    Wordz
 {% endblock %}
 
 {% block main %}
-    <form action="/quote" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol" type="text">
-        </div>
-        <button class="btn btn-primary" type="submit">Search</button>
-    </form>
-    {% if search %}
-        <h1> {{ search.symbol }} current value: {{ search.price | usd }}</h1>
-    {% endif %}
+    <!-- tabella1: urgent -->
+    <div>
+        <p><h6>Urgent:</h6></p>
+        <table>
+            <tr>
+                <th>To-do</th>
+                <th>Delaying for</th>
+                <th>Remove</th>
+            </tr>
+            {% for row in user_todo_urgent %}
+            <tr>
+                <td>{{ row.item }}</td>
+                <td>{{ row.delaying }} €</td>
+                <td>
+                    <form method="post">
+                        <button type="submit" name="remove" value="{{ row.item }}">Done</button>
+                    </form>    
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-    <p>
-        <h6>Recent Search:</h6>
-    </p>
-    <table>
-        <tr>
-            <th>Symbol</th>
-            <th>Unit Price</th>
-        </tr>
-        {% for row in search_history %}
-        <tr>
-            <td>{{ row.item }}</td>
-            <td>{{ row.price | usd}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <!-- tabella2: backlog -->
+    <div>
+        <p><h6>Urgent:</h6></p>
+        <table>
+            <tr>
+                <th>To-do</th>
+                <th>Delaying for</th>
+                <th>Done</th>
+                <th>Delete</th>
+            </tr>
+            {% for row in user_todo_backlog %}
+            <tr>
+                <td>{{ row.item }}</td>
+                <td>{{ row.delaying }} €</td>
+                <td>
+                    <form method="post">
+                        <button type="submit" name="remove" value="{{ row.item }}">Done</button>
+                    </form>    
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 {% endblock %}
