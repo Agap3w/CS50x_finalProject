@@ -12,9 +12,9 @@ The purpose of this app is to keep track in a very simple & user-friendly way of
 Based on a SQL cloudserver, and with a mobile adaptive HTML code, the user can login into this app from multiples devices, inserting an expense while wating for the grocery checkout or comfortable looking at monthly expense analysis . 
 
 #### Folder/File: 
-- *app.py*: this is the main py file that structures the file. Webpages are here rendered through Flask, while all the database side is managed through sqlite3.
-- _helpers.py_: imported to get some functions like login required and other functions involved in string comparison and SQL operations
-- <i>requirements.txt</iu>: list of all package involved in the project
+- *app.py* : this is the main py file that structures the file. Webpages are here rendered through Flask, while all the database side is managed through sqlite3.
+- _helpers.py_ : imported to get some functions like login required and other functions involved in string comparison and SQL operations
+- <i>requirements.txt</u>: list of all package involved in the project
 - <i>fp.db</u>: SQL DB with 3 linked tables: USERS, with id, username, and hash(psw); EXPENSES, with id,username, category, description, amount, and timedate; TODOS, with id, username, category, item, status, and timedate.
 - static/<i>styles.css</i>: CSS contribution to the web-pages
 - static/<i>logic.js</i>: JavaScript contribution to the HTML
