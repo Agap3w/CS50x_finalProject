@@ -3,15 +3,15 @@
 #### Video Demo:  <URL HERE>
 #### Description:
 
-####Languages:
+#### Languages:
 Python, HTML, CSS, JavaScript
 
-####Summary:
+#### Summary:
 Checkpoint is a web-app inspired by the the 2024 CS50-X Finance PS.
 The purpose of this app is to keep track in a very simple & user-friendly way of two separate things: user's <b>to-do</b> lists and <b>expenses.</b>
 Based on a SQL cloudserver, and with a mobile adaptive HTML code, the user can login into this app from multiples devices, inserting an expense while wating for the grocery checkout or comfortable looking at monthly expense analysis . 
 
-####Folder/File: 
+#### Folder/File: 
 - <u>app.py</u>: this is the main py file that structures the file. Webpages are here rendered thought Flask, while all the database side is managed thought sqlite3.
 - <u>helpers.py</u>: imported to get some functions like login required and other functions involved in string comparison and SQL operations
 - <u>requirements.txt</u>: list of all package involved in the project
@@ -29,7 +29,7 @@ Based on a SQL cloudserver, and with a mobile adaptive HTML code, the user can l
 - templates/<u>numberz.html</u>: Section 4: after selecting a month, the user can visualize spending detail in a plan table and in month/category chart.
 
 
-####General philosopy and future updates:
+#### General philosopy and future updates:
 Checkpoint's DNA means to be something quick and comfy that can be used to keep track of two things that often got messed up in the plannig: an always changing to-do lists and expenses made (long tail included!).
 Even tho the lightness of Checkpoint is intended, i recognize that few steps can be achieved to make it more useful and more solid.  
 Beyond CS50 final project purpose, i will keep updating Checkpoints at low efforts. 
