@@ -59,7 +59,7 @@ def todo():
         return redirect("/todo")
     
     else: #if GET mando html
-        todo_history = db.execute("SELECT item, category FROM todos WHERE username = ? LIMIT 5", session["username"])
+        todo_history = db.execute("SELECT item, category FROM todos WHERE username = ? ORDER BY timedate DESC LIMIT 5", session["username"])
         return render_template("todo.html", todo_history=todo_history)
 
 
