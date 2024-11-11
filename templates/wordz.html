@@ -1,5 +1,4 @@
 <!--
-estetica: tabelle side to side (creo container)
 #OPTIONAL: tab per vedere storico todo status=0
 #OPTIONAL: gestione del passaggio da URGENT a BACKLOG sia manuale (lo sposta l'utente) che automatico (es dopo un po' di gg).
 
@@ -13,6 +12,11 @@ estetica: tabelle side to side (creo container)
 {% endblock %}
 
 {% block main %}
+    <p>
+        <h3>Wordz.</h3>
+        <h6>You have {{ user_todo_urgent | length }} urgent and {{ user_todo_backlog | length }} backlog.</h6>    
+        <h6>Current active to-do:</h6><br>
+    </p>
     <!-- tabella1: urgent -->
     <div class="table-container2">
         <div>
@@ -26,7 +30,7 @@ estetica: tabelle side to side (creo container)
                 {% for row in user_todo_urgent %}
                 <tr>
                     <td>{{ row.item }}</td>
-                    <td>{{ row.delay }}</td>
+                    <td>{{ row.delay }} days</td>
                     <td>
                         <form method="post">
                             <button type="submit" name="remove" value="{{ row.item }}">Remove</button>
@@ -49,7 +53,7 @@ estetica: tabelle side to side (creo container)
                 {% for row in user_todo_backlog %}
                 <tr>
                     <td>{{ row.item }}</td>
-                    <td>{{ row.delay }}</td>
+                    <td>{{ row.delay }} days</td>
                     <td>
                         <form method="post">
                             <button type="submit" name="remove" value="{{ row.item }}">Remove</button>

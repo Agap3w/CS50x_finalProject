@@ -206,11 +206,12 @@ def expense():
 @app.route("/numberz", methods=["GET", "POST"])
 @login_required
 def numberz():
+    selected_month = None
     if request.method == "POST":
         selected_month = request.form.get('month')
-    else:
+    #else:
         # Default to the current month if no form is submitted
-        selected_month = datetime.now().strftime('%B')  # Get the full month name
+        #selected_month = datetime.now().strftime('%B')  # Get the full month name
 
     selected_month_expenses, expenses_data = get_expenses_and_totals(session["username"], selected_month)
     return render_template("numberz.html", selected_month=selected_month, selected_month_expenses=selected_month_expenses, expenses_data=expenses_data)

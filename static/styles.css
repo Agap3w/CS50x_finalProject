@@ -39,9 +39,38 @@ td, th {
     text-align: center;
 }
 
-.highlight,th {
+th {
     background-color: #0A5269;
     color: white;
+}
+
+.highlight {
+    background-color: #0A5269;
+    color: white;
+    display: inline; /* Ensure it only highlights the text */
+}
+
+
+.highlight2 {
+    background-color: #e3ee54;
+    color: rgb(0, 0, 0);
+}
+
+.highlight3 {
+    background-color: white;
+    color: #0A5269;
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    display: inline;
+}
+
+/* Rimuove sottolineatura da hyperlink */
+a {
+    text-decoration: none;
+}
+
+.big-dot {
+    font-size: 2em; /* Adjust the size as needed */
 }
 
 /* General styles */
@@ -70,9 +99,11 @@ td, th {
 
 /*for double table in wordz */
 .table-container2 {
-    display: flex;
+    display: flex; /* this should be for mobile adaptive */
     flex-wrap: wrap;
-    gap: 100px; /* Adjust the gap as needed */
+    gap: 100px; /* gap between tables */
+    justify-content: center; /* Center the container horizontally */
+
 
 }
 
@@ -101,4 +132,16 @@ table th, table td {
     .chart-container {
         max-width: 100%; /* Allow chart container to take full width on small screens */
     }
+}
+
+/* Index Box */
+.box {
+    display: block;
+    border: 1px solid #ccc;
+    padding-top: 0;
+    padding-bottom: 15px;
+    margin: 10px auto; /* Center the box */
+    text-decoration: none;
+    color: inherit;
+    width: 400px; /* Set a fixed width */
 }

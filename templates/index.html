@@ -10,10 +10,28 @@
 
 {% block main %}
 <p>
-    <h3>Hello, {{  username  }}.</h3><br><br><br>
-    <h6>Here you can track your <a href="/todo" class="highlight">to-do</a></h6><br><br><br>
-    <h6>and manage your <a href="/expense" class="highlight">expenses</a></h6>
+    <br><h3>Hello, {{  username  }}.</h3><br>
+    <h6>Checkpoint has 4 different section navigable throught the top header stripe.</h6>
+    <h6>Please find below a brief explanation of each section:</h6><br><br>
 
+    <a href="/todo" class="box">
+        <h5 class="highlight">Add to-do<span class="highlight3 big-dot">.</span></h5><br>
+        <h7>In this section you can insert new to-do and check for last submissions.</h7>
+    </a><br>
+    
+    <a href="/wordz" class="box">
+        <h5 class="highlight">Wordz<span class="highlight3 big-dot">.</span></h5><br>
+        <h7>Here you can navigate your to-do lists, urgent and backlog, with an indication of due days.</h7>
+    </a><br>
+    
+    <a href="/expense" class="box">
+        <h5 class="highlight">Add expense<span class="highlight3 big-dot">.</span></h5><br>
+        <h7>Insert expenses, with detail of category and amount (€).</h7>
+    </a><br>
+
+    <a href="/numberz" class="box">
+        <h5 class="highlight">Numberz<span class="highlight3 big-dot">.</span></h5><br>
+        <h7>Check your expenses by month.</h7>
+    </a><br>
 </p>
-
 {% endblock %}

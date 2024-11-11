@@ -10,59 +10,62 @@
 {% endblock %}
 
 {% block main %}
-<div class= "container">
-
+    <p>
+        <h3> Numberz.</h3>
+        <h6> Select a month to visualize related expenses:</h6>
+    </p>
     <!-- menu tendina scegli il mese -->
-    <div class="dropdown-container">
-        <form method="POST" action="/numberz">
-            <label for="month">Choose a month:</label>
-            <select id="month" name="month">
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">December</option>
-            </select>
-            <button type="submit">Update</button>
-        </form>
-    </div>
-
-    <!-- Form and Chart Containers -->
-    <div class="form-chart-container">
-        <div class="table-container">
+    <form action="/numberz" method="POST">
+        <select class="form-control mx-auto w-auto mb-3" id="month" name="month" onchange="this.form.submit()">
+            <option value="" disabled {% if not selected_month %}selected{% endif %}>Select a month</option>
+            <option value="January" {% if selected_month == 'January' %}selected{% endif %}>January</option>
+            <option value="February" {% if selected_month == 'February' %}selected{% endif %}>February</option>
+            <option value="March" {% if selected_month == 'March' %}selected{% endif %}>March</option>
+            <option value="April" {% if selected_month == 'April' %}selected{% endif %}>April</option>
+            <option value="May" {% if selected_month == 'May' %}selected{% endif %}>May</option>
+            <option value="June" {% if selected_month == 'June' %}selected{% endif %}>June</option>
+            <option value="July" {% if selected_month == 'July' %}selected{% endif %}>July</option>
+            <option value="August" {% if selected_month == 'August' %}selected{% endif %}>August</option>
+            <option value="September" {% if selected_month == 'September' %}selected{% endif %}>September</option>
+            <option value="October" {% if selected_month == 'October' %}selected{% endif %}>October</option>
+            <option value="November" {% if selected_month == 'November' %}selected{% endif %}>November</option>
+            <option value="December" {% if selected_month == 'December' %}selected{% endif %}>December</option>
+        </select>
+    </form>
+    {% if selected_month %}
         <p>
-            <h6>Spese {{ selected_month }}:</h6>
+            <br><h5> Month selected: <span class="highlight2">{{ selected_month | default('No month selected') }}</span></h5><br>
         </p>
-        <table>
-            <tr>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Date</th>
-        </tr>
-            {% for row in selected_month_expenses %}
-            <tr>
-                <td>{{ row.category }}</td>
-                <td>{{ row.description }}</td>
-                <td>{{ row.amount }}€</td>
-                <td>{{ row.formatted_date }}</td>
+        <!-- Form and Chart Containers -->
+        <div class="form-chart-container">
+            <div class="table-container">
+            <p>
+                <h6>All expenses in a table:</h6>
+            </p>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Date</th>
             </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class = "chart-container">
-        <div id="labels" style="display: none;">{{ expenses_data.labels | tojson | safe }}</div>
-        <div id="amounts" style="display: none;">{{ expenses_data.amounts | tojson | safe }}</div>
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
+                {% for row in selected_month_expenses %}
+                <tr>
+                    <td>{{ row.category }}</td>
+                    <td>{{ row.description }}</td>
+                    <td>{{ row.amount }}€</td>
+                    <td>{{ row.formatted_date }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class = "chart-container">
+            <p><h6>Spent by category:</h6></p>
+            <div id="labels" style="display: none;">{{ expenses_data.labels | tojson | safe }}</div>
+            <div id="amounts" style="display: none;">{{ expenses_data.amounts | tojson | safe }}</div>
+            <canvas id="myChart"></canvas>
+        </div>
+        {% endif %}
 {% endblock %}
 
 {% block scripts %}
