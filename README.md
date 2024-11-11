@@ -14,8 +14,8 @@ Based on a SQL cloudserver, and with a mobile adaptive HTML code, the user can l
 #### Folder/File: 
 - *app.py* : this is the main py file that structures the file. Webpages are here rendered through Flask, while all the database side is managed through sqlite3.
 - _helpers.py_ : imported to get some functions like login required and other functions involved in string comparison and SQL operations
-- <i>requirements.txt</u>: list of all package involved in the project
-- <i>fp.db</u>: SQL DB with 3 linked tables: USERS, with id, username, and hash(psw); EXPENSES, with id,username, category, description, amount, and timedate; TODOS, with id, username, category, item, status, and timedate.
+- <i>requirements.txt</i> : list of all package involved in the project
+- <u>fp.db</u> : SQL DB with 3 linked tables: USERS, with id, username, and hash(psw); EXPENSES, with id,username, category, description, amount, and timedate; TODOS, with id, username, category, item, status, and timedate.
 - static/<i>styles.css</i>: CSS contribution to the web-pages
 - static/<i>logic.js</i>: JavaScript contribution to the HTML
 - templates/<i>layout.html</i>: general layout of the webapp. all other html pages are blockmain within this masterpage.
