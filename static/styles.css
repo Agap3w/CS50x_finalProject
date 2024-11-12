@@ -22,19 +22,17 @@ nav .navbar-brand .green
     color: #2e944b;
 }
 
-/* table da sistemare con bootstrap? */
 table {
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2rem auto 3rem auto;
     border: 2px solid black;
     border-collapse: collapse;
     background-color: #FAFAFA;
+    width: 100%;
+    white-space: nowrap;
 }
 
 td, th {
-    border: 1px solid black;
+    border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
 }
@@ -100,24 +98,17 @@ a {
     flex-wrap: wrap;
     gap: 100px; /* gap between tables */
     justify-content: center; /* Center the container horizontally */
+}
 
-
+.table-container2 div,
+.table-container2 table {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 .chart-container {
     flex: 1;
     max-width: 600px; /* Maximum width for the chart container */
-}
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
 }
 
 /* Responsive Design for Mobile */
@@ -128,6 +119,11 @@ table th, table td {
 
     .chart-container {
         max-width: 100%; /* Allow chart container to take full width on small screens */
+    }
+
+    .table-container2 {
+        flex-direction: column;
+        gap: 0; /* No gap for mobile */
     }
 }
 
@@ -140,5 +136,6 @@ table th, table td {
     margin: 10px auto; /* Center the box */
     text-decoration: none;
     color: inherit;
-    width: 400px; /* Set a fixed width */
+    max-width: 400px;
+    width: 100%;
 }

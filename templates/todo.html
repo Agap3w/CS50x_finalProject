@@ -30,17 +30,18 @@
     <p>
         <br><br></vr><h6>Recently added:</h6>
     </p>
-    <table>
-        <tr>
-            <th>To-do</th>
-            <th>Priority</th>
-        </tr>
-        {% for row in todo_history %}
-        <tr>
-            <td>{{ row.item }}</td>
-            <td>{{ row.category }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
+    <div style="overflow-x: auto;">
+        <table>
+            <tr>
+                <th>To-do</th>
+                <th>Priority</th>
+            </tr>
+            {% for row in todo_history %}
+            <tr>
+                <td>{{ row.item }}</td>
+                <td>{{ row.category }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

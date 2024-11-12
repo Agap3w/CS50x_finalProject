@@ -1,6 +1,6 @@
 # CS50x_finalProject
 ### Checkpoint
-#### Video Demo:  <URL HERE>
+#### Video Demo: <https://youtu.be/ftSOzgp6T1k>
 #### Description:
 
 #### Languages:
@@ -30,10 +30,11 @@ Based on a SQL cloudserver, and with a mobile adaptive HTML code, the user can l
 
 
 #### General philosopy and future updates:
-Checkpoint's DNA means to be something quick and comfy that can be used to keep track of two things that often got messed up in the plannig: an always changing to-do lists and expenses made (long tail included!).
+Checkpoint's DNA means to be something quick and comfy that can be used to keep track of two things that often got messed up in the plannig: an always changing to-do list and expenses made (long tail included!).
 Even tho the lightness of Checkpoint is intended, i recognize that few steps can be achieved to make it more useful and more solid.  
-Beyond CS50 final project purpose, i will keep updating Checkpoints at low efforts. 
-Even Future updates on which i'm working on:
+Beyond CS50 final project purpose, i will keep updating Checkpoints in my spare times. 
+
+Future updates on which i'm working on:
 - add feature to move to-do items between clusters;
 - add feature to choose custom category lists;
 - add insight generation as 3rd pillar on Numberz, besides table and chart;

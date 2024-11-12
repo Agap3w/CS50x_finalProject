@@ -34,22 +34,23 @@
         <p>
             <br><br><h6>Recently added:</h6>
         </p>
-        <table>
-            <tr>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Date</th>
-
-            </tr>
-            {% for row in user_last_expenses %}
-            <tr>
-                <td>{{ row.category }}</td>
-                <td>{{ row.description }}</td>
-                <td>{{ row.amount }} €</td>
-                <td>{{ row.formatted_date }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+        <div style="overflow-x: auto;">
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+                {% for row in user_last_expenses %}
+                <tr>
+                    <td>{{ row.category }}</td>
+                    <td>{{ row.description }}</td>
+                    <td>{{ row.amount }} €</td>
+                    <td>{{ row.formatted_date }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}
