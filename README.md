@@ -2,11 +2,6 @@
 ### Checkpoint
 #### Video Demo: <https://youtu.be/ftSOzgp6T1k>
 #### Description:
-
-#### Languages:
-Python, HTML, CSS, JavaScript
-
-#### Summary:
 Checkpoint is a web-app inspired by the the 2024 CS50-X Finance PS.
 The purpose of this app is to keep track in a very simple & user-friendly way of two separate things: user's <b>to-do</b> lists and <b>expenses.</b>
 Based on a SQL cloudserver, and with a mobile adaptive HTML code, the user can login into this app from multiples devices, inserting an expense while wating for the grocery checkout or comfortable looking at monthly expense analysis . 
